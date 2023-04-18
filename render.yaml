@@ -1,7 +1,16 @@
+# Render YAML
+# https://render.com/docs/yaml-spec
+# https://render.com/docs/deploy-node-express
+
 services:
-  - name: app
+  - name: server-api-practice-deploy
     env: node
-    buildCommand: npm run build
-    startCommand: npm run start
-    healthCheckPath: /api/healthcheck
-    httpPort: 8080
+    start_cmd: node dist/app.js
+    env_files:
+      - .env
+    health_check:
+      http_path: /api/healthcheck
+      http_port: 8080
+      timeout_seconds: 10
+    # Change the directory to execute
+    workdir: /server-api-practice-deploy/dist
